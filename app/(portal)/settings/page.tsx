@@ -9,12 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ErrorCard } from "@/components/ErrorCard";
 import { useMembers, useSession } from "@/hooks/queries";
-import { useSignOut } from "@/hooks/useAuth";
 import type { Member, SessionUser } from "@/lib/api/types";
 
 function initialsFromEmail(email: string) {
@@ -54,13 +52,7 @@ const ROLE_VARIANT: Record<Member["role"], "default" | "secondary" | "outline"> 
   viewer: "outline",
 };
 
-function AccountCard({
-  u,
-  onSignOut,
-}: {
-  u: SessionUser;
-  onSignOut: () => void;
-}) {
+function AccountCard({ u }: { u: SessionUser }) {
   return (
     <Card>
       <CardHeader>
@@ -84,9 +76,6 @@ function AccountCard({
             value={typeof u.credits === "number" ? u.credits : "—"}
           />
         </dl>
-        <Button variant="outline" onClick={onSignOut}>
-          Sign out
-        </Button>
       </CardContent>
     </Card>
   );
@@ -139,7 +128,6 @@ function MembersCard() {
 
 function AccountSection() {
   const session = useSession();
-  const { signOut } = useSignOut();
   if (session.isError)
     return (
       <ErrorCard
@@ -150,7 +138,7 @@ function AccountSection() {
       />
     );
   if (session.isLoading || !session.data) return <Skeleton className="h-48" />;
-  return <AccountCard u={session.data.user} onSignOut={signOut} />;
+  return <AccountCard u={session.data.user} />;
 }
 
 export default function SettingsPage() {

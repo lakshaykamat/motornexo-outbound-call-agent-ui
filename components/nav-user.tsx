@@ -18,15 +18,10 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import {
-  EllipsisVerticalIcon,
-  CircleUserRoundIcon,
-  LogOutIcon,
-} from "lucide-react";
+import { EllipsisVerticalIcon, CircleUserRoundIcon } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSession } from "@/hooks/queries";
-import { useSignOut } from "@/hooks/useAuth";
 
 function initials(name: string | undefined, email: string) {
   const source = (name ?? email).trim();
@@ -40,28 +35,14 @@ function initials(name: string | undefined, email: string) {
 export function NavUser() {
   const { isMobile } = useSidebar();
   const session = useSession();
-  const { signOut } = useSignOut();
 
   const user = session.data?.user;
 
-  if (session.isLoading) {
+  if (session.isLoading || !user) {
     return (
       <SidebarMenu>
         <SidebarMenuItem>
           <Skeleton className="h-12 w-full" />
-        </SidebarMenuItem>
-      </SidebarMenu>
-    );
-  }
-
-  if (!user) {
-    return (
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton size="lg" render={<Link href="/login" />}>
-            <CircleUserRoundIcon />
-            <span className="truncate">Sign in</span>
-          </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
     );
@@ -120,11 +101,6 @@ export function NavUser() {
             <DropdownMenuItem render={<Link href="/settings" />}>
               <CircleUserRoundIcon />
               Account
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={signOut}>
-              <LogOutIcon />
-              Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

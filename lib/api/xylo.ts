@@ -53,7 +53,7 @@ async function gatewayFetch(
   path: string,
   init?: RequestInit,
 ): Promise<Response> {
-  const res = await fetch(`${env.apiUrl}${path}`, {
+  return fetch(`${env.apiUrl}${path}`, {
     ...init,
     credentials: "include",
     headers: {
@@ -61,10 +61,6 @@ async function gatewayFetch(
       ...(init?.headers ?? {}),
     },
   });
-  if (res.status === 401 && typeof window !== "undefined") {
-    window.location.href = "/login";
-  }
-  return res;
 }
 
 // api-gateway wraps every response in { statusCode, success, message, data }.
@@ -140,35 +136,6 @@ export async function fetchMembers(): Promise<MembersResponse> {
   const data = await unwrap(res);
   const members = Array.isArray(data) ? data : [];
   return MembersResponseSchema.parse({ members, total: members.length });
-}
-
-export async function login(email: string, password: string): Promise<void> {
-  if (env.mockData) {
-    await new Promise((resolve) => setTimeout(resolve, 700));
-    return;
-  }
-  const res = await fetch(`${env.apiUrl}/auth/login`, {
-    method: "POST",
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-  if (!res.ok) {
-    let detail = "Login failed";
-    try {
-      const body = await res.json();
-      detail = body?.message ?? detail;
-    } catch {}
-    throw new Error(detail);
-  }
-}
-
-export async function logout(): Promise<void> {
-  if (env.mockData) return;
-  await fetch(`${env.apiUrl}/auth/logout`, {
-    method: "POST",
-    credentials: "include",
-  });
 }
 
 // Pull every call (up to a cap) and turn it into a CSV in the browser.
