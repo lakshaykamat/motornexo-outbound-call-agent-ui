@@ -1,0 +1,55 @@
+{
+  "statusCode": 200,
+  "success": true,
+  "message": "OK",
+  "data": {
+    "orgId": "org_01HX9NQ2K7M3E4D5",
+    "enabled": true,
+    "objective": "Qualify inbound leads, surface budget and timeline, and book a 20-min discovery call with an AE when the lead is decision-maker and budget is confirmed.",
+    "crmProvider": "hubspot",
+    "agent": {
+      "retellAgentId": "agent_01HXC7M3PQR8V2N4",
+      "retellLlmId": "llm_01HXC7M5T9K2B6X8",
+      "retellKnowledgeBaseId": "kb_01HXC8N2P6T4M7W9",
+      "name": "Xylo · Octify SDR",
+      "fromNumber": "+14155551217",
+      "voice": {
+        "voiceId": "11labs-clara",
+        "language": "en-US",
+        "speed": 1.02
+      },
+      "llm": {
+        "model": "claude-sonnet-4-6",
+        "systemPrompt": "You are Xylo, an outbound SDR for Octify Technologies. Be warm, brief, and specific. Ask one question at a time. If the contact is a decision-maker and confirms budget, offer the calendar and book the meeting. If they object, surface one rebuttal from the KB, then accept the answer. Never promise pricing not present in the KB.",
+        "temperature": 0.4,
+        "maxTokens": 800
+      }
+    },
+    "businessHours": {
+      "timezone": "America/Los_Angeles",
+      "is24x7": false,
+      "schedule": [
+        { "days": ["mon", "tue", "wed", "thu", "fri"], "open": "09:00", "close": "18:00" },
+        { "days": ["sat"], "open": "10:00", "close": "14:00" }
+      ]
+    },
+    "callRules": {
+      "maxAttemptsPerLead": 3,
+      "retryAfterNotConnectedHours": 18,
+      "dedupeWindowHours": 24,
+      "crmWritebackMaxAttempts": 3
+    },
+    "stageMapping": {
+      "pipelineId": "pipeline_inbound_2026",
+      "newStageId": "stage_new",
+      "onAppointmentScheduledStageId": "stage_meeting_booked",
+      "onFollowUpStageId": "stage_follow_up",
+      "onNoAnswerStageId": "stage_no_answer",
+      "onClosedLostStageId": "stage_closed_lost",
+      "onInvalidContactStageId": "stage_invalid",
+      "onDoNotContactStageId": "stage_dnc"
+    },
+    "createdAt": "2025-09-20T08:00:00.000Z",
+    "updatedAt": "2026-05-10T14:11:00.000Z"
+  }
+}

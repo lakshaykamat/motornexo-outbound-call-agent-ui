@@ -1,0 +1,239 @@
+{
+  "statusCode": 200,
+  "success": true,
+  "message": "OK",
+  "data": {
+    "calls": [
+      {
+        "_id": "call_01HXG2P4MT8K9N3W",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550101",
+        "prospectName": "Ada Lovelace",
+        "company": "Analytical Engines",
+        "status": "completed",
+        "createdAt": "2026-05-12T09:14:00.000Z",
+        "startedAt": "2026-05-12T09:14:00.000Z",
+        "endedAt": "2026-05-12T09:18:32.000Z",
+        "durationSec": 272,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Hi Ada, this is Xylo from Octify — do you have ninety seconds?" },
+          { "role": "user", "content": "Sure, what's this about?" },
+          { "role": "agent", "content": "We help inbound SDR teams write into HubSpot in under sixty seconds. Could I grab fifteen minutes Thursday to show you a side-by-side?" },
+          { "role": "user", "content": "Thursday at two works. Send the invite." },
+          { "role": "agent", "content": "Done — confirming Thursday May 15 at 2pm PT. You'll get a calendar invite within five minutes." }
+        ],
+        "analysis": {
+          "outcome": "meeting_booked",
+          "sentiment": "positive",
+          "summary": "Prospect agreed to a 15-minute discovery call Thursday 2pm. Owns SDR tooling decisions, currently evaluating two alternatives.",
+          "objectionsRaised": [],
+          "followUpAction": "Send calendar invite for Thursday 2pm",
+          "followUpDate": "2026-05-15",
+          "score": 8.4
+        },
+        "crmWritebackStatus": "success"
+      },
+      {
+        "_id": "call_01HXG2QRT7V3M2L8",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550102",
+        "prospectName": "Grace Hopper",
+        "company": "Compiler Co",
+        "status": "completed",
+        "createdAt": "2026-05-12T08:02:00.000Z",
+        "startedAt": "2026-05-12T08:02:00.000Z",
+        "endedAt": "2026-05-12T08:04:11.000Z",
+        "durationSec": 131,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Hi Grace, this is Xylo from Octify." },
+          { "role": "user", "content": "We just renewed with another vendor. Not a good time." },
+          { "role": "agent", "content": "Totally understand. Can I check back at the start of Q1 2027 when your contract is closer to renewal?" },
+          { "role": "user", "content": "Yes, that's fine." }
+        ],
+        "analysis": {
+          "outcome": "not_interested",
+          "sentiment": "neutral",
+          "summary": "Recently renewed with Air.ai. Agreed to a re-check at the start of Q1 2027.",
+          "objectionsRaised": ["already_under_contract"],
+          "followUpAction": "Re-engage in Q1 2027",
+          "followUpDate": "2027-02-01",
+          "score": 3.2
+        },
+        "crmWritebackStatus": "success"
+      },
+      {
+        "_id": "call_01HXG2RTQ4M8N7K3",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550103",
+        "prospectName": "Alan Turing",
+        "company": "Bletchley Labs",
+        "status": "completed",
+        "createdAt": "2026-05-11T16:41:00.000Z",
+        "startedAt": "2026-05-11T16:41:00.000Z",
+        "endedAt": "2026-05-11T16:42:08.000Z",
+        "durationSec": 68,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Voicemail tone…" },
+          { "role": "agent", "content": "Hi Alan, this is Xylo from Octify. I'll try again tomorrow morning — feel free to call us back at 415-555-1217." }
+        ],
+        "analysis": {
+          "outcome": "voicemail",
+          "sentiment": "neutral",
+          "summary": "Reached voicemail. Left a 30-second pitch with callback number.",
+          "objectionsRaised": [],
+          "followUpAction": "Retry tomorrow 10am PT",
+          "followUpDate": "2026-05-13",
+          "score": 2.0
+        },
+        "crmWritebackStatus": "pending"
+      },
+      {
+        "_id": "call_01HXG2T8V2M4N5K6",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550104",
+        "prospectName": "Katherine Johnson",
+        "company": "Orbital Dynamics",
+        "status": "completed",
+        "createdAt": "2026-05-11T14:23:00.000Z",
+        "startedAt": "2026-05-11T14:23:00.000Z",
+        "endedAt": "2026-05-11T14:27:45.000Z",
+        "durationSec": 285,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Hi Katherine, this is Xylo from Octify." },
+          { "role": "user", "content": "Interesting. Can you send something over and call me Monday?" },
+          { "role": "agent", "content": "Of course — I'll email a one-pager today and call back Monday at 10am PT." }
+        ],
+        "analysis": {
+          "outcome": "callback_requested",
+          "sentiment": "positive",
+          "summary": "Prospect requested follow-up Monday with pricing one-pager attached.",
+          "objectionsRaised": ["needs_more_info"],
+          "followUpAction": "Email pricing one-pager and call Monday 10am",
+          "followUpDate": "2026-05-18",
+          "score": 6.7
+        },
+        "crmWritebackStatus": "success"
+      },
+      {
+        "_id": "call_01HXG2VN4P8M3W7K",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550105",
+        "prospectName": "Margaret Hamilton",
+        "company": "Apollo Software",
+        "status": "completed",
+        "createdAt": "2026-05-11T11:08:00.000Z",
+        "startedAt": "2026-05-11T11:08:00.000Z",
+        "endedAt": "2026-05-11T11:13:54.000Z",
+        "durationSec": 354,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Hi Margaret, this is Xylo from Octify — I saw your team is hiring SDRs." },
+          { "role": "user", "content": "We are, but I'm curious — does this thing actually book meetings or just dial?" },
+          { "role": "agent", "content": "Books and writes the summary into HubSpot before your rep opens the lead. Want a fifteen-minute side-by-side this week?" },
+          { "role": "user", "content": "Thursday morning works." }
+        ],
+        "analysis": {
+          "outcome": "meeting_booked",
+          "sentiment": "positive",
+          "summary": "Strong fit. VP of Sales, 14-person SDR team, currently using Salesloft. Booked Thursday 9am PT.",
+          "objectionsRaised": ["scepticism_about_booking"],
+          "followUpAction": "Send calendar invite + customer story (Ferris Wheel)",
+          "followUpDate": "2026-05-15",
+          "score": 9.1
+        },
+        "crmWritebackStatus": "success"
+      },
+      {
+        "_id": "call_01HXG2WPR3K8M2N4",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550106",
+        "prospectName": "Edsger Dijkstra",
+        "company": "Shortest Path",
+        "status": "completed",
+        "createdAt": "2026-05-10T19:55:00.000Z",
+        "startedAt": "2026-05-10T19:55:00.000Z",
+        "endedAt": "2026-05-10T19:55:42.000Z",
+        "durationSec": 42,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Hi Edsger, this is Xylo from Octify." },
+          { "role": "user", "content": "Wrong number. Don't call again." },
+          { "role": "agent", "content": "I'm sorry about that — you're on our do-not-call list now. Have a good evening." }
+        ],
+        "analysis": {
+          "outcome": "wrong_number",
+          "sentiment": "negative",
+          "summary": "Wrong number. Added to suppression list.",
+          "objectionsRaised": ["wrong_number"],
+          "followUpAction": null,
+          "followUpDate": null,
+          "score": 0.5
+        },
+        "crmWritebackStatus": "success"
+      },
+      {
+        "_id": "call_01HXG2YK7T2N8M4P",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550107",
+        "prospectName": "Barbara Liskov",
+        "company": "Substitution Inc",
+        "status": "completed",
+        "createdAt": "2026-05-10T16:32:00.000Z",
+        "startedAt": "2026-05-10T16:32:00.000Z",
+        "endedAt": "2026-05-10T16:35:18.000Z",
+        "durationSec": 198,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Hi Barbara, calling from Octify about inbound SDR tooling." },
+          { "role": "user", "content": "Please remove me from your list." },
+          { "role": "agent", "content": "Of course — you're removed effective immediately. Apologies for the interruption." }
+        ],
+        "analysis": {
+          "outcome": "opted_out",
+          "sentiment": "negative",
+          "summary": "Prospect requested opt-out. Added to global suppression.",
+          "objectionsRaised": ["opt_out"],
+          "followUpAction": null,
+          "followUpDate": null,
+          "score": 0.0
+        },
+        "crmWritebackStatus": "success"
+      },
+      {
+        "_id": "call_01HXG303T5M8N4K7",
+        "orgId": "org_01HX9NQ2K7M3E4D5",
+        "phone": "+14155550108",
+        "prospectName": "Linus Torvalds",
+        "company": "Kernel Works",
+        "status": "completed",
+        "createdAt": "2026-05-10T10:11:00.000Z",
+        "startedAt": "2026-05-10T10:11:00.000Z",
+        "endedAt": "2026-05-10T10:14:02.000Z",
+        "durationSec": 182,
+        "recordingUrl": null,
+        "transcript": [
+          { "role": "agent", "content": "Hi Linus, this is Xylo from Octify." },
+          { "role": "user", "content": "I'm in a meeting — call me Tuesday at noon?" },
+          { "role": "agent", "content": "Tuesday at noon PT — done. Talk then." }
+        ],
+        "analysis": {
+          "outcome": "callback_requested",
+          "sentiment": "neutral",
+          "summary": "In a meeting. Requested callback Tuesday noon PT.",
+          "objectionsRaised": ["bad_timing"],
+          "followUpAction": "Call back Tuesday 12:00 PT",
+          "followUpDate": "2026-05-19",
+          "score": 5.1
+        },
+        "crmWritebackStatus": "success"
+      }
+    ],
+    "total": 8,
+    "page": 1,
+    "limit": 25
+  }
+}

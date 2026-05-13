@@ -1,0 +1,38 @@
+{
+  "statusCode": 200,
+  "success": true,
+  "message": "OK",
+  "data": {
+    "user": {
+      "id": "6a0361e335571ce985bcb7a0",
+      "email": "owner@motornexo.com",
+      "credits": 40,
+      "organizationId": "69db399c3f74afc19d6a54bf",
+      "role": "owner",
+      "organization": {
+        "id": "69db399c3f74afc19d6a54bf",
+        "name": "MotorNexo",
+        "website": "https://motornexo.com",
+        "description": "MotorNexo is a verified B2B auto parts marketplace built for the automotive repair ecosystem.",
+        "ownerRole": "Dealer Principal / GM / Owner / Fixed Ops Director / Controller",
+        "industry": "Automotive — B2B Auto Parts Marketplace",
+        "customerSegment": "b2b",
+        "icps": [
+          "SELLER — Franchised dealerships with aged/excess parts inventory to monetize",
+          "BUYER — Body shops and collision centers needing fast OEM parts sourcing"
+        ],
+        "icpLocations": ["Los Angeles, California", "San Diego, California"],
+        "productOrServiceSummary": "A verified B2B auto parts marketplace for inventory, sourcing, orders, and backorders.",
+        "salesMotion": "Outbound demo-booking via AI voice.",
+        "salesChannel": "Outbound AI voice calling (direct sales)",
+        "pricingNote": "Free to use. Defer pricing detail to the demo.",
+        "enabledProducts": {
+          "revpilot": { "enabled": true },
+          "xylo": { "enabled": true }
+        }
+      }
+    },
+    "issued_at": 1778606656,
+    "expires_at": 1781198656
+  }
+}

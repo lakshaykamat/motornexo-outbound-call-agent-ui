@@ -1,0 +1,9 @@
+{
+  "statusCode": 200,
+  "success": true,
+  "message": "OK",
+  "data": {
+    "url": "https://example.com/mock-recording.mp3?token=mock",
+    "durationSec": 272
+  }
+}

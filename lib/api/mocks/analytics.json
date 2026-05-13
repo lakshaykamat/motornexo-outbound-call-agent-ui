@@ -1,0 +1,12 @@
+{
+  "statusCode": 200,
+  "success": true,
+  "message": "OK",
+  "data": {
+    "totalCalls": 1284,
+    "answered": 873,
+    "meetingsBooked": 161,
+    "avgDurationSec": 187,
+    "conversionRate": 0.1844
+  }
+}

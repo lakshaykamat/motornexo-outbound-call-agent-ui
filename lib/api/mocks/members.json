@@ -1,0 +1,43 @@
+{
+  "statusCode": 200,
+  "success": true,
+  "message": "OK",
+  "data": {
+    "total": 3,
+    "members": [
+      {
+        "_id": "6a0361e335571ce985bcb7a0",
+        "email": "owner@motornexo.com",
+        "role": "owner",
+        "organizationId": "69db399c3f74afc19d6a54bf",
+        "credits": 40,
+        "isEmailVerified": true,
+        "isOrganizationEmailVerified": true,
+        "createdAt": "2026-05-12T17:22:43.366Z",
+        "updatedAt": "2026-05-12T17:22:43.840Z"
+      },
+      {
+        "_id": "6a0361e335571ce985bcb7a1",
+        "email": "noor@motornexo.com",
+        "role": "admin",
+        "organizationId": "69db399c3f74afc19d6a54bf",
+        "credits": 10,
+        "isEmailVerified": true,
+        "isOrganizationEmailVerified": true,
+        "createdAt": "2026-05-12T17:30:00.000Z",
+        "updatedAt": "2026-05-12T17:30:00.000Z"
+      },
+      {
+        "_id": "6a0361e335571ce985bcb7a2",
+        "email": "ravi@motornexo.com",
+        "role": "member",
+        "organizationId": "69db399c3f74afc19d6a54bf",
+        "credits": 0,
+        "isEmailVerified": false,
+        "isOrganizationEmailVerified": false,
+        "createdAt": "2026-05-12T18:00:00.000Z",
+        "updatedAt": "2026-05-12T18:00:00.000Z"
+      }
+    ]
+  }
+}

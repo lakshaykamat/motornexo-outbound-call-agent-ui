@@ -1,0 +1,101 @@
+{
+  "statusCode": 200,
+  "success": true,
+  "message": "OK",
+  "data": {
+    "orgId": "org_01HX9NQ2K7M3E4D5",
+    "updatedAt": "2026-05-09T17:22:00.000Z",
+    "products": [
+      {
+        "name": "Groovo Suite",
+        "description": "Voice + chat + CRM-writeback for revenue teams. Connects to HubSpot, Salesforce, and Pipedrive.",
+        "price": "$1,200 / month",
+        "pitch": "Cut inbound response time from hours to under sixty seconds, with every call summarised in your CRM before the rep opens the lead."
+      },
+      {
+        "name": "Xylo Voice",
+        "description": "Outbound SDR voice agent with calendar + CRM writeback. Built on Retell + Claude.",
+        "price": "$600 / month per seat",
+        "pitch": "An SDR that never sleeps, never forgets the talk track, and books meetings while your reps are heads-down."
+      },
+      {
+        "name": "RevPilot",
+        "description": "Pipeline scoring + deal coaching for AEs. Surfaces stalled deals, predicts close dates.",
+        "price": "$280 / month per AE",
+        "pitch": "Stop guessing which deals are real. RevPilot reads every email and call so you can forecast in minutes, not days."
+      }
+    ],
+    "objections": [
+      {
+        "objection": "We already use a competing tool.",
+        "response": "Totally fair. Most teams who switch tell us Xylo writes back into CRM in ninety seconds rather than the next morning — would a fifteen-minute side-by-side help you see the difference?"
+      },
+      {
+        "objection": "We don't have budget right now.",
+        "response": "Understood. Could I send a one-pager and circle back at the start of next quarter when budgets reset?"
+      },
+      {
+        "objection": "I'm not the right person.",
+        "response": "No problem — who on your team owns inbound SDR tooling? I'd love to send them a short note with your context."
+      },
+      {
+        "objection": "It sounds robotic.",
+        "response": "I hear that a lot. Reps tell us prospects can't tell within the first thirty seconds — would you mind if I sent a thirty-second recording so you can hear for yourself?"
+      },
+      {
+        "objection": "Security / compliance is a blocker.",
+        "response": "We're SOC 2 Type II, HIPAA-eligible, and your data never leaves your region. Happy to send the trust packet."
+      }
+    ],
+    "caseStudies": [
+      {
+        "customer": "Ferris Wheel Fintech",
+        "outcome": "Booked 31% more discovery calls in the first 6 weeks",
+        "metric": "+31% discovery calls, ROI in 9 weeks"
+      },
+      {
+        "customer": "Northwind Logistics",
+        "outcome": "Replaced two contracted SDRs and saved $186k / year",
+        "metric": "$186k saved · 4.1× meetings per dollar"
+      },
+      {
+        "customer": "Atlas Health",
+        "outcome": "Cut inbound first-touch from 4h to 38s while staying HIPAA-eligible",
+        "metric": "38-second first touch, 0 compliance incidents"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Which CRMs do you support?",
+        "answer": "HubSpot, Salesforce, Pipedrive, and Close are supported today. Custom connectors are available on the Scale plan."
+      },
+      {
+        "question": "Can the agent call internationally?",
+        "answer": "Yes — Xylo supports outbound calls to 48 countries. Per-minute rates vary by destination."
+      },
+      {
+        "question": "How long does setup take?",
+        "answer": "Most teams are live within two business days. Onboarding includes a guided KB build and a calibration call."
+      },
+      {
+        "question": "Is the conversation recorded?",
+        "answer": "Calls are recorded only where local law permits, and we honour two-party consent automatically. Recordings live in your tenant for 30 days."
+      }
+    ],
+    "competitorNotes": "Air.ai prioritises volume; we win on CRM-writeback quality and Claude-grade reasoning. Bland is cheaper per minute; we beat them on meeting-booked conversion and timezone safety. Salesloft Cadence has no voice; we complement, not replace.",
+    "pricingNotes": "Quote list price. Discounting requires AE approval above 10%. Annual prepay unlocks 12% off. No discount on Trial. Never mention internal margin or unit cost.",
+    "qualifyingQuestions": [
+      "Are you the person who owns inbound SDR tooling at your company?",
+      "Roughly how many inbound leads does your team handle per week?",
+      "What does your team use to follow up on inbound leads today?",
+      "What's the average response time on a new inbound lead right now?",
+      "If we could cut that response time to under a minute, would you want to see a live demo?"
+    ],
+    "doNotMention": [
+      "internal model names or providers",
+      "ongoing legal disputes",
+      "specific named competitors unless the prospect names them first",
+      "the names of other customers beyond the published case studies"
+    ]
+  }
+}
