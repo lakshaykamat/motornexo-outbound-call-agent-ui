@@ -111,10 +111,12 @@ export const KbCaseStudySchema = z.object({
   outcome: z.string(),
   metric: z.string(),
 });
-export const KbFaqSchema = z.object({
-  question: z.string(),
-  answer: z.string(),
-});
+export const KbFaqSchema = z.union([
+  z.object({ question: z.string(), answer: z.string() }),
+  z
+    .object({ q: z.string(), a: z.string() })
+    .transform((v) => ({ question: v.q, answer: v.a })),
+]);
 
 export const KnowledgeBaseSchema = z.object({
   orgId: z.string(),
@@ -126,7 +128,7 @@ export const KnowledgeBaseSchema = z.object({
   pricingNotes: z.string(),
   qualifyingQuestions: z.array(z.string()),
   doNotMention: z.array(z.string()),
-  updatedAt: z.string(),
+  updatedAt: z.string().default(""),
 });
 export type KnowledgeBase = z.infer<typeof KnowledgeBaseSchema>;
 export type KbProduct = z.infer<typeof KbProductSchema>;
@@ -164,9 +166,9 @@ export const BusinessHoursWindowSchema = z.object({
 });
 
 export const BusinessHoursSchema = z.object({
-  timezone: z.string(),
-  schedule: z.array(BusinessHoursWindowSchema),
-  is24x7: z.boolean(),
+  timezone: z.string().default(""),
+  schedule: z.array(BusinessHoursWindowSchema).default([]),
+  is24x7: z.boolean().default(false),
 });
 
 export const AgentConfigSchema = z.object({
@@ -195,8 +197,8 @@ export const AgentConfigSchema = z.object({
     onInvalidContactStageId: z.string().nullable(),
     onDoNotContactStageId: z.string().nullable(),
   }),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  createdAt: z.string().default(""),
+  updatedAt: z.string().default(""),
 });
 export type AgentConfig = z.infer<typeof AgentConfigSchema>;
 export type CallRules = z.infer<typeof CallRulesSchema>;
