@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/chart";
 import { ErrorCard } from "@/components/ErrorCard";
 import { useCalls } from "@/hooks/queries";
-import type { Outcome, XyloCall } from "@/lib/api/types";
+import { isPlacedCall, type Outcome, type XyloCall } from "@/lib/api/types";
 import { outcomeLabel } from "@/lib/outcomes";
 
 const TREND_DAYS = 14;
@@ -226,7 +226,7 @@ export function DashboardCharts() {
     );
   }
 
-  const calls = callsQuery.data?.calls ?? [];
+  const calls = (callsQuery.data?.calls ?? []).filter(isPlacedCall);
   const loading = callsQuery.isLoading;
 
   return (

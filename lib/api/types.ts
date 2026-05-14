@@ -36,6 +36,18 @@ export const CallStatusSchema = z.enum([
 ]);
 export type CallStatus = z.infer<typeof CallStatusSchema>;
 
+// Statuses where the call has not yet been placed on the wire.
+// Anything not in this set represents a real call attempt.
+const UNPLACED_CALL_STATUSES: ReadonlySet<string> = new Set([
+  "queued",
+  "follow_up_scheduled",
+  "dispatching",
+]);
+
+export function isPlacedCall(call: { status?: string }): boolean {
+  return !!call.status && !UNPLACED_CALL_STATUSES.has(call.status);
+}
+
 export const AnalysisSchema = z.object({
   outcome: OutcomeSchema,
   sentiment: SentimentSchema,
