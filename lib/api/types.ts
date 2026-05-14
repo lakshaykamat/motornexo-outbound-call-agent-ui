@@ -48,6 +48,24 @@ export function isPlacedCall(call: { status?: string }): boolean {
   return !!call.status && !UNPLACED_CALL_STATUSES.has(call.status);
 }
 
+// Mirrors STATUS_GROUP_MEMBERS in the gateway (xylo.constants.ts).
+// Kept in sync manually — both ends define the buckets the portal asks for
+// via ?statusGroup=.
+export const CALL_STATUS_GROUP_MEMBERS = {
+  queued: ["queued", "follow_up_scheduled"],
+  placed: [
+    "dispatched",
+    "ringing",
+    "in_progress",
+    "completed",
+    "not_connected",
+    "cancelled",
+    "error",
+  ],
+  live: ["dispatching", "dispatched", "ringing", "in_progress"],
+  failed: ["not_connected", "cancelled", "error"],
+} as const satisfies Record<string, readonly CallStatus[]>;
+
 export const AnalysisSchema = z.object({
   outcome: OutcomeSchema,
   sentiment: SentimentSchema,
@@ -98,6 +116,9 @@ export const AnalyticsSchema = z.object({
   meetingsBooked: z.number(),
   avgDurationSec: z.number(),
   conversionRate: z.number(),
+  queued: z.number().default(0),
+  liveNow: z.number().default(0),
+  failed: z.number().default(0),
 });
 export type Analytics = z.infer<typeof AnalyticsSchema>;
 

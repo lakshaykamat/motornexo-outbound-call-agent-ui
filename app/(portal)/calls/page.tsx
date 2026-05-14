@@ -2,17 +2,29 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CallsFilters, type OutcomeFilter } from "@/components/CallsFilters";
+import {
+  CallsFilters,
+  type OutcomeFilter,
+  type StatusGroupCounts,
+  type StatusGroupFilter,
+} from "@/components/CallsFilters";
 import { CallsTable } from "@/components/CallsTable";
 import { CallDrawer } from "@/components/CallDrawer";
 import { ErrorCard } from "@/components/ErrorCard";
-import { useCalls } from "@/hooks/queries";
+import { useAnalytics, useCalls } from "@/hooks/queries";
 import { useExportCalls } from "@/hooks/useExportCalls";
 import type { Outcome } from "@/lib/api/types";
+import type { CallStatusGroup } from "@/lib/api/xylo";
 
 const PAGE_SIZE = 25;
 
 function toApiOutcome(filter: OutcomeFilter): Outcome | undefined {
+  return filter === "all" ? undefined : filter;
+}
+
+function toApiStatusGroup(
+  filter: StatusGroupFilter,
+): CallStatusGroup | undefined {
   return filter === "all" ? undefined : filter;
 }
 
@@ -59,26 +71,52 @@ function Pagination({
 
 export default function CallsPage() {
   const [outcome, setOutcome] = useState<OutcomeFilter>("all");
+  const [statusGroup, setStatusGroup] = useState<StatusGroupFilter>("all");
   const [page, setPage] = useState(1);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const apiOutcome = toApiOutcome(outcome);
-  const callsQuery = useCalls({ outcome: apiOutcome, page, limit: PAGE_SIZE });
+  const apiStatusGroup = toApiStatusGroup(statusGroup);
+  const callsQuery = useCalls({
+    outcome: apiOutcome,
+    statusGroup: apiStatusGroup,
+    page,
+    limit: PAGE_SIZE,
+  });
+  const analytics = useAnalytics();
   const { exportCsv, exporting } = useExportCalls();
 
   const total = callsQuery.data?.total ?? 0;
   const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
+  // Tab counts come from the analytics endpoint so they stay correct
+  // regardless of the current page/outcome filter.
+  const statusCounts: StatusGroupCounts | undefined = analytics.data && {
+    all: analytics.data.totalCalls + analytics.data.queued,
+    queued: analytics.data.queued,
+    live: analytics.data.liveNow,
+    placed: analytics.data.totalCalls,
+    failed: analytics.data.failed,
+  };
+
   return (
     <>
       <div className="flex flex-col gap-4 px-4 lg:px-6">
         <CallsFilters
+          statusGroup={statusGroup}
+          onStatusGroupChange={(next) => {
+            setPage(1);
+            setStatusGroup(next);
+          }}
+          statusCounts={statusCounts}
           outcome={outcome}
           onOutcomeChange={(next) => {
             setPage(1);
             setOutcome(next);
           }}
-          onExport={() => exportCsv({ outcome: apiOutcome })}
+          onExport={() =>
+            exportCsv({ outcome: apiOutcome, statusGroup: apiStatusGroup })
+          }
           exporting={exporting}
         />
 

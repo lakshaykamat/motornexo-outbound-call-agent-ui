@@ -31,10 +31,13 @@ import {
   mockSession,
 } from "./mock-data";
 
+export type CallStatusGroup = "queued" | "placed" | "live" | "failed";
+
 export type CallsQuery = {
   page?: number;
   limit?: number;
   outcome?: Outcome;
+  statusGroup?: CallStatusGroup;
   from?: string;
   to?: string;
 };
@@ -44,6 +47,7 @@ function toSearchParams(q: CallsQuery): URLSearchParams {
   if (q.page) p.set("page", String(q.page));
   if (q.limit) p.set("limit", String(q.limit));
   if (q.outcome) p.set("outcome", q.outcome);
+  if (q.statusGroup) p.set("statusGroup", q.statusGroup);
   if (q.from) p.set("from", q.from);
   if (q.to) p.set("to", q.to);
   return p;

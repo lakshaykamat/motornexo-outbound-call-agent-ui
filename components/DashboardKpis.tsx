@@ -1,12 +1,16 @@
 "use client";
 
-import { PhoneCallIcon, PhoneIncomingIcon, CalendarCheckIcon, ClockIcon } from "lucide-react";
+import {
+  PhoneCallIcon,
+  PhoneIncomingIcon,
+  CalendarCheckIcon,
+  HourglassIcon,
+} from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ErrorCard } from "@/components/ErrorCard";
 import { useAnalytics } from "@/hooks/queries";
-import { formatDuration } from "@/lib/format";
 import type { Analytics } from "@/lib/api/types";
 
 function Stat({
@@ -90,6 +94,8 @@ export function DashboardKpis() {
   }
 
   const a = analytics.data;
+  const queueHint =
+    a.liveNow > 0 ? `${numberFmt.format(a.liveNow)} live now` : "waiting to dial";
 
   return (
     <div className="grid grid-cols-1 gap-3 px-4 sm:grid-cols-2 lg:grid-cols-4 lg:px-6">
@@ -98,6 +104,12 @@ export function DashboardKpis() {
         value={numberFmt.format(a.totalCalls)}
         hint={`${numberFmt.format(a.answered)} connected`}
         icon={<PhoneCallIcon className="size-4" />}
+      />
+      <Stat
+        label="Queue"
+        value={numberFmt.format(a.queued)}
+        hint={queueHint}
+        icon={<HourglassIcon className="size-4" />}
       />
       <Stat
         label="Connect rate"
@@ -110,12 +122,6 @@ export function DashboardKpis() {
         value={numberFmt.format(a.meetingsBooked)}
         hint={pctFmt.format(a.conversionRate) + " conversion"}
         icon={<CalendarCheckIcon className="size-4" />}
-      />
-      <Stat
-        label="Avg duration"
-        value={formatDuration(a.avgDurationSec)}
-        hint="per connected call"
-        icon={<ClockIcon className="size-4" />}
       />
     </div>
   );
