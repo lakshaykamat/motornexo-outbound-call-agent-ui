@@ -128,6 +128,48 @@ export const RecordingResponseSchema = z.object({
 });
 export type RecordingResponse = z.infer<typeof RecordingResponseSchema>;
 
+// Mirrors DispatchCallDto (api-gateway/src/domains/xylo/dto/dispatch-call.dto.ts).
+// Phone must be E.164 — the gateway rejects anything else.
+export const E164_PATTERN = /^\+[1-9]\d{6,14}$/;
+
+export function normalizePhone(value: string): string {
+  return value.replace(/[\s\-().]/g, "");
+}
+
+export function validatePhone(value: string): string | null {
+  const v = normalizePhone(value);
+  if (!v) return "Phone is required";
+  if (!v.startsWith("+")) return "Phone must start with + (country code)";
+  if (!/^\+\d+$/.test(v)) return "Phone can only contain digits after +";
+  if (v.startsWith("+0")) return "Country code cannot start with 0";
+  if (!E164_PATTERN.test(v)) {
+    return "Phone must be 7–15 digits in E.164 format (e.g. +14155552671)";
+  }
+  return null;
+}
+
+export const DispatchCallRequestSchema = z.object({
+  phone: z
+    .string()
+    .transform(normalizePhone)
+    .superRefine((value, ctx) => {
+      const error = validatePhone(value);
+      if (error) ctx.addIssue({ code: z.ZodIssueCode.custom, message: error });
+    }),
+  prospectName: z.string().max(120).optional(),
+  company: z.string().max(120).optional(),
+  context: z.string().max(2000).optional(),
+});
+export type DispatchCallRequest = z.infer<typeof DispatchCallRequestSchema>;
+
+// Mirrors XyloImmediateDispatchResult (api-gateway/src/domains/xylo/xylo.types.ts).
+export const DispatchCallResponseSchema = z.object({
+  callId: z.string(),
+  retellCallId: z.string(),
+  status: z.literal("dispatched"),
+});
+export type DispatchCallResponse = z.infer<typeof DispatchCallResponseSchema>;
+
 // Mirrors XyloKb model (api-gateway/src/models/xylo-kb.model.ts).
 export const KbProductSchema = z.object({
   name: z.string(),

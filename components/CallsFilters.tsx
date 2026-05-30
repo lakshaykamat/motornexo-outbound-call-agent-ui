@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { DispatchCallDialog } from "@/components/DispatchCallDialog";
 import { OUTCOME_OPTIONS } from "@/lib/outcomes";
 import type { Outcome } from "@/lib/api/types";
 import type { CallStatusGroup } from "@/lib/api/xylo";
@@ -114,10 +115,11 @@ export function CallsFilters({
           </SelectContent>
         </Select>
 
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-2">
           <Button variant="outline" onClick={onExport} disabled={exporting}>
             {exporting ? "Preparing…" : "Export CSV"}
           </Button>
+          <DispatchCallDialog />
         </div>
       </div>
     </div>

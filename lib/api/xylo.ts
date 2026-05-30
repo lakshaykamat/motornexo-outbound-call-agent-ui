@@ -3,6 +3,7 @@ import {
   AgentConfigSchema,
   AnalyticsSchema,
   CallsListResponseSchema,
+  DispatchCallResponseSchema,
   KnowledgeBaseSchema,
   MembersResponseSchema,
   OrganizationSchema,
@@ -12,6 +13,8 @@ import {
   type AgentConfig,
   type Analytics,
   type CallsListResponse,
+  type DispatchCallRequest,
+  type DispatchCallResponse,
   type KnowledgeBase,
   type MembersResponse,
   type Organization,
@@ -132,6 +135,16 @@ export async function fetchOrganization(orgId: string): Promise<Organization> {
   if (env.mockData) return mockOrganization;
   const res = await gatewayFetch(`/organizations/${encodeURIComponent(orgId)}`);
   return OrganizationSchema.parse(await unwrap(res));
+}
+
+export async function dispatchCall(
+  body: DispatchCallRequest,
+): Promise<DispatchCallResponse> {
+  const res = await gatewayFetch(`/xylo/calls/dispatch`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+  return DispatchCallResponseSchema.parse(await unwrap(res));
 }
 
 export async function fetchMembers(): Promise<MembersResponse> {
