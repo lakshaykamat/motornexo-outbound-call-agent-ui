@@ -28,7 +28,9 @@ const TABS: Tab[] = [
   { value: "queued", label: "Queue" },
   { value: "live", label: "Live" },
   { value: "placed", label: "Placed" },
-  { value: "failed", label: "Failed" },
+  { value: "not_connected", label: "Not Connected" },
+  { value: "cancelled", label: "Cancelled" },
+  { value: "error", label: "Error" },
 ];
 
 const numberFmt = new Intl.NumberFormat("en-US");

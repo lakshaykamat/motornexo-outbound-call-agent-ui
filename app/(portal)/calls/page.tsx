@@ -96,7 +96,9 @@ export default function CallsPage() {
     queued: analytics.data.queued,
     live: analytics.data.liveNow,
     placed: analytics.data.totalCalls,
-    failed: analytics.data.failed,
+    not_connected: analytics.data.notConnected,
+    cancelled: analytics.data.cancelled,
+    error: analytics.data.errored,
   };
 
   return (

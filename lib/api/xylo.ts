@@ -34,7 +34,13 @@ import {
   mockSession,
 } from "./mock-data";
 
-export type CallStatusGroup = "queued" | "placed" | "live" | "failed";
+export type CallStatusGroup =
+  | "queued"
+  | "placed"
+  | "live"
+  | "not_connected"
+  | "cancelled"
+  | "error";
 
 export type CallsQuery = {
   page?: number;

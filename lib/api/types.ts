@@ -63,7 +63,9 @@ export const CALL_STATUS_GROUP_MEMBERS = {
     "error",
   ],
   live: ["dispatching", "dispatched", "ringing", "in_progress"],
-  failed: ["not_connected", "cancelled", "error"],
+  not_connected: ["not_connected"],
+  cancelled: ["cancelled"],
+  error: ["error"],
 } as const satisfies Record<string, readonly CallStatus[]>;
 
 export const AnalysisSchema = z.object({
@@ -118,7 +120,9 @@ export const AnalyticsSchema = z.object({
   conversionRate: z.number(),
   queued: z.number().default(0),
   liveNow: z.number().default(0),
-  failed: z.number().default(0),
+  notConnected: z.number().default(0),
+  cancelled: z.number().default(0),
+  errored: z.number().default(0),
 });
 export type Analytics = z.infer<typeof AnalyticsSchema>;
 
