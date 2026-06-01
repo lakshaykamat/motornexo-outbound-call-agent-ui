@@ -100,21 +100,28 @@ export default function CallsPage() {
     limit: PAGE_SIZE,
   });
   const analytics = useAnalytics();
+  // The analytics endpoint only returns a combined `failed` total, so we fetch
+  // each terminal status separately to drive the per-tab badges. `limit: 1`
+  // keeps the payload tiny — we only need `total`.
+  const notConnectedCount = useCalls({ status: "not_connected", limit: 1 });
+  const cancelledCount = useCalls({ status: "cancelled", limit: 1 });
+  const errorCount = useCalls({ status: "error", limit: 1 });
   const { exportCsv, exporting } = useExportCalls();
 
   const total = callsQuery.data?.total ?? 0;
   const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
-  // Tab counts come from the analytics endpoint so they stay correct
-  // regardless of the current page/outcome filter.
+  // Tab counts come from the analytics endpoint (for the broad buckets) and
+  // per-status list queries (for the three terminal-status tabs), so they stay
+  // correct regardless of the current page/outcome filter.
   const statusCounts: StatusGroupCounts | undefined = analytics.data && {
     all: analytics.data.totalCalls + analytics.data.queued,
     queued: analytics.data.queued,
     live: analytics.data.liveNow,
     placed: analytics.data.totalCalls,
-    not_connected: analytics.data.notConnected,
-    cancelled: analytics.data.cancelled,
-    error: analytics.data.errored,
+    not_connected: notConnectedCount.data?.total,
+    cancelled: cancelledCount.data?.total,
+    error: errorCount.data?.total,
   };
 
   return (

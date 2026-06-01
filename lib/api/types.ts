@@ -118,9 +118,7 @@ export const AnalyticsSchema = z.object({
   conversionRate: z.number(),
   queued: z.number().default(0),
   liveNow: z.number().default(0),
-  notConnected: z.number().default(0),
-  cancelled: z.number().default(0),
-  errored: z.number().default(0),
+  failed: z.number().default(0),
 });
 export type Analytics = z.infer<typeof AnalyticsSchema>;
 
