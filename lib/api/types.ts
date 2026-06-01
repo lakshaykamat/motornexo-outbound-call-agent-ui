@@ -63,9 +63,7 @@ export const CALL_STATUS_GROUP_MEMBERS = {
     "error",
   ],
   live: ["dispatching", "dispatched", "ringing", "in_progress"],
-  not_connected: ["not_connected"],
-  cancelled: ["cancelled"],
-  error: ["error"],
+  failed: ["not_connected", "cancelled", "error"],
 } as const satisfies Record<string, readonly CallStatus[]>;
 
 export const AnalysisSchema = z.object({

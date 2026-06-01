@@ -13,7 +13,7 @@ import { CallDrawer } from "@/components/CallDrawer";
 import { ErrorCard } from "@/components/ErrorCard";
 import { useAnalytics, useCalls } from "@/hooks/queries";
 import { useExportCalls } from "@/hooks/useExportCalls";
-import type { Outcome } from "@/lib/api/types";
+import type { CallStatus, Outcome } from "@/lib/api/types";
 import type { CallStatusGroup } from "@/lib/api/xylo";
 
 const PAGE_SIZE = 25;
@@ -22,10 +22,26 @@ function toApiOutcome(filter: OutcomeFilter): Outcome | undefined {
   return filter === "all" ? undefined : filter;
 }
 
-function toApiStatusGroup(
-  filter: StatusGroupFilter,
-): CallStatusGroup | undefined {
-  return filter === "all" ? undefined : filter;
+// The gateway accepts either a `statusGroup` bucket (queued/placed/live/failed)
+// or a single `status` value — not both. The UI exposes the three terminal
+// statuses as their own tabs, so map those to ?status= and let the bucket tabs
+// use ?statusGroup=.
+function toApiStatusFilter(filter: StatusGroupFilter): {
+  statusGroup?: CallStatusGroup;
+  status?: CallStatus;
+} {
+  switch (filter) {
+    case "all":
+      return {};
+    case "queued":
+    case "placed":
+    case "live":
+      return { statusGroup: filter };
+    case "not_connected":
+    case "cancelled":
+    case "error":
+      return { status: filter };
+  }
 }
 
 function Pagination({
@@ -76,10 +92,10 @@ export default function CallsPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const apiOutcome = toApiOutcome(outcome);
-  const apiStatusGroup = toApiStatusGroup(statusGroup);
+  const apiStatusFilter = toApiStatusFilter(statusGroup);
   const callsQuery = useCalls({
     outcome: apiOutcome,
-    statusGroup: apiStatusGroup,
+    ...apiStatusFilter,
     page,
     limit: PAGE_SIZE,
   });
@@ -117,7 +133,7 @@ export default function CallsPage() {
             setOutcome(next);
           }}
           onExport={() =>
-            exportCsv({ outcome: apiOutcome, statusGroup: apiStatusGroup })
+            exportCsv({ outcome: apiOutcome, ...apiStatusFilter })
           }
           exporting={exporting}
         />

@@ -21,6 +21,7 @@ import {
   type AgentConfig,
   type Analytics,
   type CallsListResponse,
+  type CallStatus,
   type KnowledgeBase,
   type MembersResponse,
   type Organization,
@@ -47,6 +48,7 @@ export function mockCallsList(query: {
   limit?: number;
   outcome?: Outcome;
   statusGroup?: keyof typeof CALL_STATUS_GROUP_MEMBERS;
+  status?: CallStatus;
 }): CallsListResponse {
   const page = query.page ?? 1;
   const limit = query.limit ?? allCalls.limit;
@@ -56,6 +58,7 @@ export function mockCallsList(query: {
   const filtered = allCalls.calls.filter((c) => {
     if (query.outcome && c.analysis?.outcome !== query.outcome) return false;
     if (groupMembers && (!c.status || !groupMembers.has(c.status))) return false;
+    if (query.status && c.status !== query.status) return false;
     return true;
   });
   const start = (page - 1) * limit;

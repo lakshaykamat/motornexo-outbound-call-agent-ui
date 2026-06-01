@@ -18,6 +18,7 @@ import {
   type KnowledgeBase,
   type MembersResponse,
   type Organization,
+  type CallStatus,
   type Outcome,
   type SessionResponse,
   type XyloCall,
@@ -34,19 +35,17 @@ import {
   mockSession,
 } from "./mock-data";
 
-export type CallStatusGroup =
-  | "queued"
-  | "placed"
-  | "live"
-  | "not_connected"
-  | "cancelled"
-  | "error";
+// Mirrors XYLO_STATUS_GROUPS in the gateway. The gateway only accepts these
+// four bucket values for ?statusGroup=. For finer slices (not_connected /
+// cancelled / error), use the single-value ?status= filter instead.
+export type CallStatusGroup = "queued" | "placed" | "live" | "failed";
 
 export type CallsQuery = {
   page?: number;
   limit?: number;
   outcome?: Outcome;
   statusGroup?: CallStatusGroup;
+  status?: CallStatus;
   from?: string;
   to?: string;
 };
@@ -57,6 +56,7 @@ function toSearchParams(q: CallsQuery): URLSearchParams {
   if (q.limit) p.set("limit", String(q.limit));
   if (q.outcome) p.set("outcome", q.outcome);
   if (q.statusGroup) p.set("statusGroup", q.statusGroup);
+  if (q.status) p.set("status", q.status);
   if (q.from) p.set("from", q.from);
   if (q.to) p.set("to", q.to);
   return p;

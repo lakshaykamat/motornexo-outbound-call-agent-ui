@@ -11,13 +11,26 @@ import {
 import { DispatchCallDialog } from "@/components/DispatchCallDialog";
 import { OUTCOME_OPTIONS } from "@/lib/outcomes";
 import type { Outcome } from "@/lib/api/types";
-import type { CallStatusGroup } from "@/lib/api/xylo";
 import { cn } from "@/lib/utils";
 
 export type OutcomeFilter = Outcome | "all";
-export type StatusGroupFilter = CallStatusGroup | "all";
 
-export type StatusGroupCounts = Partial<Record<CallStatusGroup, number>> & {
+// UI tabs combine the gateway's status groups (queued/placed/live) with the
+// individual terminal statuses we surface separately (not_connected/cancelled/
+// error). The page maps each one to either ?statusGroup= or ?status= when
+// querying the gateway.
+export type StatusGroupFilter =
+  | "all"
+  | "queued"
+  | "placed"
+  | "live"
+  | "not_connected"
+  | "cancelled"
+  | "error";
+
+export type StatusGroupCounts = Partial<
+  Record<Exclude<StatusGroupFilter, "all">, number>
+> & {
   all?: number;
 };
 
